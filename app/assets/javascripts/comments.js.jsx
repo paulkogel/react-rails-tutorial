@@ -2,16 +2,15 @@
 
 var Comment = React.createClass({
   render: function() {
-    var rawMarkup = this.props.children.toString();
     return (
       <div className="comment panel panel-default">
         <div className="panel-heading">
           <h3 className="panel-title">
-            {this.props.author}
+            {this.props.comment.author}
           </h3>
         </div>
         <div className="panel-body">
-          <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
+          <span>{this.props.comment.text}</span>
         </div>
       </div>
     );
@@ -76,9 +75,7 @@ var CommentList = React.createClass({
         // `key` is a React-specific concept and is not mandatory for the
         // purpose of this tutorial. if you're curious, see more here:
         // http://facebook.github.io/react/docs/multiple-components.html#dynamic-children
-        <Comment author={comment.author} key={index}>
-          {comment.text}
-        </Comment>
+        <Comment comment={comment} key={index}></Comment>
       );
     });
     return (
