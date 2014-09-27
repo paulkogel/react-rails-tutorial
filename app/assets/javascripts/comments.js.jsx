@@ -57,7 +57,6 @@ var CommentBox = React.createClass({
   },
   componentDidMount: function() {
     this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
@@ -125,13 +124,8 @@ var CommentForm = React.createClass({
   }
 });
 
-$(document).on("page:change", function() {
-  var $content = $("#content");
-  if ($content.length > 0) {
-    React.renderComponent(
-      <CommentBox url="comments.json" pollInterval={2000} />,
-      document.getElementById('content')
-    );
-  }
-})
-
+window.onload = function() {
+  React.renderComponent(
+    <CommentBox url="comments.json" />,
+    document.getElementById('content'));
+};
